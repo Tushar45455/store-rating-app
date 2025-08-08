@@ -1,13 +1,11 @@
 const { Store, Rating, User } = require('../models');
 const { Op } = require('sequelize');
 
-// Helper function to handle case-insensitive search across databases
 const getCaseInsensitiveOperator = () => {
   const dbDialect = process.env.DB_DIALECT || 'postgres';
   return dbDialect === 'sqlite' ? Op.like : Op.iLike;
 };
 
-// Get all stores for normal users (with user's rating if exists)
 const getAllStores = async (req, res) => {
   try {
     const { 
@@ -24,7 +22,6 @@ const getAllStores = async (req, res) => {
     const whereClause = {};
     const caseInsensitiveOp = getCaseInsensitiveOperator();
 
-    // Apply search filters
     if (name) {
       whereClause.name = { [caseInsensitiveOp]: `%${name}%` };
     }

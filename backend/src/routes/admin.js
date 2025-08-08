@@ -9,14 +9,11 @@ const {
 } = require('../middleware/validation');
 const { authenticateToken, authorizeRoles } = require('../middleware/auth');
 
-// All admin routes require authentication and admin role
 router.use(authenticateToken);
 router.use(authorizeRoles('system_admin'));
 
-// Dashboard statistics
 router.get('/dashboard/stats', adminController.getDashboardStats);
 
-// User management
 router.post('/users', 
   userValidationRules(), 
   validate, 
@@ -26,7 +23,6 @@ router.post('/users',
 router.get('/users', adminController.getUsers);
 router.get('/users/:id', adminController.getUserDetails);
 
-// Store management
 router.post('/stores', 
   storeValidationRules(), 
   validate, 

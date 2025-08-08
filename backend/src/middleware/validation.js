@@ -1,6 +1,5 @@
 const { body, validationResult } = require('express-validator');
 
-// Validation rules
 const userValidationRules = () => {
   return [
     body('name')
@@ -70,7 +69,6 @@ const passwordUpdateRules = () => {
   ];
 };
 
-// Middleware to check validation results
 const validate = (req, res, next) => {
   const errors = validationResult(req);
   if (!errors.isEmpty()) {
